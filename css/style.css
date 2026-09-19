@@ -81,7 +81,7 @@ h2 { font-size:clamp(34px,4vw,54px);line-height:1.08;letter-spacing:-2px; }
 .service-grid { display:grid;grid-template-columns:repeat(4,1fr);gap:15px; }
 .service-card { min-height:330px; padding:28px; border:1px solid #2b374c;border-radius:var(--radius); background:#131d30; display:flex; flex-direction:column; transition:.25s; }
 .service-card:hover { transform:translateY(-6px); border-color:#4b5872; }
-.service-card.featured { background:linear-gradient(145deg,#24204c,#161d31); border-color:#5149a5; }
+.service-card.featured { background:linear-gradient(145deg, #13112c, #0c0f1d); border-color:#7c4dff; }
 .icon { width:48px;height:48px;display:grid;place-items:center;border-radius:14px;background:#222d43;color:#9d94ff;font-size:22px;margin-bottom:30px; }
 .service-card h3 { font-size:21px; margin-bottom:12px; }
 .service-card p { color:#9aa6ba;font-size:14px; }
