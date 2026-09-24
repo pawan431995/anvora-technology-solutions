@@ -19,21 +19,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // --- UPDATED EMAILJS INTEGRATION ---
   const form = document.getElementById("ideaForm");
   form?.addEventListener("submit", (event) => {
     event.preventDefault();
-    const data = new FormData(form);
-    const email = "hello@anvoratechnology.com"; // CHANGE THIS
-    const subject = encodeURIComponent("New App / Web Solution Request");
-    const body = encodeURIComponent(
-      `Name: ${data.get("name")}\n` +
-      `Phone: ${data.get("phone")}\n` +
-      `Email: ${data.get("email")}\n` +
-      `Business / Organization: ${data.get("business") || "Not provided"}\n\n` +
-      `Problem / Requirement:\n${data.get("message")}`
-    );
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+
+    // 1. Find the submit button to show loading feedback
+    const submitBtn = form.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn ? submitBtn.innerText : 'Submit';
+    if (submitBtn) submitBtn.innerText = 'Sending...';
+
+    // 2. Send the form data to EmailJS
+    // Replace 'YOUR_SERVICE_ID' and 'YOUR_TEMPLATE_ID' with your actual keys
+    emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', form)
+      .then(() => {
+        if (submitBtn) submitBtn.innerText = originalBtnText;
+        alert('Thank you! Your request has been sent successfully.');
+        form.reset(); // Clears the form fields after successful sending
+      })
+      .catch((error) => {
+        if (submitBtn) submitBtn.innerText = originalBtnText;
+        alert('Oops... Something went wrong. Please try again.');
+        console.error('EmailJS Error:', error);
+      });
   });
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+  // Dynamic Year update
+  const yearElement = document.getElementById("year");
+  if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
+  }
 });
