@@ -93,6 +93,7 @@ h2 { font-size:clamp(34px,4vw,54px);line-height:1.08;letter-spacing:-2px; }
 .solution-card h3 { font-size:25px;margin:40px 0 12px; }
 .solution-card p { color:var(--muted);font-size:14px; }
 .demo-link { margin-top:auto;color:#6257db;font-size:13px;font-weight:800; }
+.demo-link-real { margin-top:auto;color:#6257db;font-size:13px;font-weight:800; }
 .custom-solution { background:linear-gradient(145deg,#f0efff,#fff); }
 .mission-section { background:#eef0f8; }
 .mission-grid { display:grid;grid-template-columns:1fr 1fr;gap:15px; }
