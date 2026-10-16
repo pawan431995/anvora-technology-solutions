@@ -2,28 +2,36 @@ document.addEventListener("DOMContentLoaded", () => {
   const menuToggle = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");
 
-  menuToggle?.addEventListener("click", () => {
-    const open = navLinks.classList.toggle("open");
-    menuToggle.setAttribute("aria-expanded", String(open));
-  });
+  if (menuToggle && navLinks) {
+    menuToggle.addEventListener("click", () => {
+      const open = navLinks.classList.toggle("open");
+      menuToggle.setAttribute("aria-expanded", String(open));
+      menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
 
-  document.querySelectorAll(".nav-links a").forEach(link => {
-    link.addEventListener("click", () => navLinks.classList.remove("open"));
-  });
+    document.querySelectorAll(".nav-links a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+      });
+    });
+  }
 
-  document.querySelectorAll(".demo-link[data-demo]").forEach(link => {
+  // Placeholder demo links (href="#") show a notice. Once a real URL is added
+  // in index.html, the link works normally and is not intercepted here.
+  document.querySelectorAll('a.demo-link[data-demo][href="#"]').forEach(link => {
     link.addEventListener("click", (event) => {
       event.preventDefault();
-      const product = link.dataset.demo;
-      alert(`${product} demo link is ready to be connected.\n\nReplace this link in index.html with your live application URL.`);
+      alert(`The ${link.dataset.demo} demo is coming soon. Contact us and we will share a live demo with you.`);
     });
   });
 
   // ---- EmailJS setup ----
-  // Replace these three with your own values from the EmailJS dashboard.
+  // Public values from your EmailJS dashboard (these are safe to expose in the browser).
   const EMAILJS_PUBLIC_KEY = "D0XpV614-oykt9mdP";   // Account > General > Public Key
-  const EMAILJS_SERVICE_ID = "service_8a4nsfj";   // Email Services > your service
-  const EMAILJS_TEMPLATE_ID = "template_bybzyl6"; // Email Templates > your template
+  const EMAILJS_SERVICE_ID = "service_8a4nsfj";     // Email Services > your service
+  const EMAILJS_TEMPLATE_ID = "template_bybzyl6";   // Email Templates > your template
 
   if (window.emailjs) {
     emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
@@ -73,5 +81,6 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
-  document.getElementById("year").textContent = new Date().getFullYear();
+  const year = document.getElementById("year");
+  if (year) year.textContent = new Date().getFullYear();
 });
