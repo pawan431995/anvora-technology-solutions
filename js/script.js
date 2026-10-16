@@ -81,6 +81,27 @@ document.addEventListener("DOMContentLoaded", () => {
       });
   });
 
+  // Fade solution cards in as they scroll into view. Skipped for reduced motion;
+  // without JavaScript the cards simply stay visible.
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const solutionCards = document.querySelectorAll(".solution-card");
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    solutionCards.forEach((card, index) => {
+      card.classList.add("reveal");
+      card.style.transitionDelay = `${(index % 4) * 80}ms`;
+    });
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          entry.target.style.transitionDelay = ""; // keep hover responsive after the reveal
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    solutionCards.forEach((card) => observer.observe(card));
+  }
+
   const year = document.getElementById("year");
   if (year) year.textContent = new Date().getFullYear();
 });

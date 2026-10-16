@@ -102,6 +102,9 @@ h2 { font-size:clamp(34px,4vw,54px);line-height:1.08;letter-spacing:-2px; }
 .solution-card p { color:var(--muted);font-size:14px; }
 .demo-link { margin-top:auto;color:#6257db;font-size:13px;font-weight:800; }
 .custom-solution { background:linear-gradient(145deg,#f0efff,#fff); }
+.solution-card { transition: transform .35s ease, box-shadow .35s ease, opacity .6s ease; }
+.solution-card:hover { transform: translateY(-6px); box-shadow: 0 22px 50px rgba(16,24,40,.12); }
+.solution-card.reveal:not(.is-visible) { opacity: 0; transform: translateY(28px); }
 .mission-section { background:#eef0f8; }
 .mission-grid { display:grid;grid-template-columns:1fr 1fr;gap:15px; }
 .mission-panel,.vision-panel { padding:55px;border-radius:var(--radius); }
